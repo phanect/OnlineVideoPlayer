@@ -1,10 +1,11 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include <qdjango/db/QDjangoModel.h>
+
 #include <QObject>
 #include <QString>
 #include <QUrl>
-#include <qdjango/db/QDjangoModel.h>
 
 /** Enumulation of web services */
 enum Service {
@@ -27,10 +28,11 @@ class Video : public QDjangoModel {
 	Q_CLASSINFO("singer", "max_length=128")
 
 public:
-	explicit Video(QObject *parent = 0);
+	//explicit Video();
+	explicit Video(const Video &video);
 
-	static Video createFromUrl(QString urlstr);
-	static Video createFromUrl(QUrl url);
+	static Video* createFromUrl(QString urlstr);
+	static Video* createFromUrl(QUrl url);
 
 	QString videoId();
 	void setVideoId(const QString videoId);

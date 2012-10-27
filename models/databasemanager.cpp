@@ -1,7 +1,10 @@
 #include "databasemanager.h"
+#include "video.h"
 
 #include <QSqlDatabase>
-#include "video.h"
+#include <qdjango/db/QDjango.h>
+#include <qdjango/db/QDjangoModel.h>
+
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
 	//
@@ -18,7 +21,7 @@ DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent) {
 	QDjango::registerModel<Video>();
 }
 
-DatabaseManager::initDB() {
+void DatabaseManager::initDB() {
 	QDjango::createTables();
 }
 

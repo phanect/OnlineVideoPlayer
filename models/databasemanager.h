@@ -10,7 +10,8 @@ public:
 
 signals:
 
-public slots:
+private:
+	void initDB();
 
 };
 

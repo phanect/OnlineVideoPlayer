@@ -30,18 +30,24 @@
 #include <QStringList>
 
 /** Video Model */
-Video::Video(QObject *parent) : QDjangoModel(parent) {
+//Video::Video() {
+	// TODO extract title and urltxt to local variables
+//}
+
+/** Video Model */
+Video::Video(const Video &) {
 	// TODO extract title and urltxt to local variables
 }
 
 /**	Create Video object from video URL string. */
-Video Video::createFromUrl(QString urlstr) {
-	return createFromUrl(QUrl(urlstr));
+Video* Video::createFromUrl(QString urlstr) {
+	QUrl url(urlstr);
+	return Video::createFromUrl(url);
 }
 
 /**	Create Video object from video URL object. */
-Video Video::createFromUrl(QUrl url) {
-	Video newVideo;
+Video* Video::createFromUrl(QUrl url) {
+	Video *newVideo = new Video();
 
 	// Note: URL Styles
 	// http://www.youtube.com/watch?v=pc1BRfuzgpI&feature=related
@@ -50,20 +56,20 @@ Video Video::createFromUrl(QUrl url) {
 
 	// decide which web service the video is.
 	if (url.host().contains("youtube.com")) {
-		newVideo.setService(Service.Youtube);
-		newVideo.setVideoId(url.queryItemValue("v"));
+		newVideo->setService(Youtube);
+		newVideo->setVideoId(url.queryItemValue("v"));
 	} else if (url.host().contains("nicovideo.jp")) {
-		newVideo.setService(Service.Nicovideo);
+		newVideo->setService(Nicovideo);
 
 		QStringList splitted = url.path().split("/"); // split URL by "/"
-		newVideo.setVideoId(splitted[1]);
+		newVideo->setVideoId(splitted[1]);
 
 	} else if (url.host().contains("vimeo.com")) {
-		newVideo.setService(Service.Vimeo);
+		newVideo->setService(Vimeo);
 
-		newVideo.setVideoId(url.path().remove("/"));
+		newVideo->setVideoId(url.path().remove("/"));
 	} else {
-		return NULL;
+		throw "Given URL is not correct URL!"; // TODO Replace to something
 	}
 
 	return newVideo;
