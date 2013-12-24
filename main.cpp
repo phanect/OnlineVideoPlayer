@@ -1,13 +1,14 @@
-#include <QtGui/QApplication>
-#include "qmlapplicationviewer.h"
+#include <QtGui/QGuiApplication>
+#include "qtquick2applicationviewer.h"
 
-Q_DECL_EXPORT int main(int argc, char *argv[]) {
-	QScopedPointer<QApplication> app(createApplication(argc, argv));
+int main(int argc, char *argv[]) {
+    QGuiApplication app(argc, argv);
 
-	QmlApplicationViewer viewer;
-	viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-	viewer.setMainQmlFile(QLatin1String("qml/OnlineVideoPlayer/main.qml"));
-	viewer.showExpanded();
+    QtQuick2ApplicationViewer viewer;
+    viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 
-	return app->exec();
+    viewer.setMainQmlFile(QStringLiteral("qml/OnlineVideoPlayer/main.qml"));
+    viewer.showExpanded();
+
+    return app.exec();
 }

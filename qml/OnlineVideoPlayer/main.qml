@@ -25,9 +25,9 @@
  **
  ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.0
 import QtWebKit 1.0
-import QtDesktop 0.1
+import QtQuick.Controls 1.0
 
 Rectangle {
     width: 600
