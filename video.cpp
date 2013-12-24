@@ -28,6 +28,7 @@
 #include "video.h"
 #include <QString>
 #include <QStringList>
+#include <QUrlQuery>
 
 /** Video Model */
 //Video::Video() {
@@ -47,7 +48,8 @@ Video* Video::createFromUrl(QString urlstr) {
 
 /**	Create Video object from video URL object. */
 Video* Video::createFromUrl(QUrl url) {
-	Video *newVideo = new Video();
+    Video *newVideo = new Video();
+    QUrlQuery *query = new QUrlQuery(url);
 
 	// Note: URL Styles
 	// http://www.youtube.com/watch?v=pc1BRfuzgpI&feature=related
@@ -57,7 +59,7 @@ Video* Video::createFromUrl(QUrl url) {
 	// decide which web service the video is.
 	if (url.host().contains("youtube.com")) {
 		newVideo->setService(Youtube);
-		newVideo->setVideoId(url.queryItemValue("v"));
+        newVideo->setVideoId(query->queryItemValue("v"));
 	} else if (url.host().contains("nicovideo.jp")) {
 		newVideo->setService(Nicovideo);
 
