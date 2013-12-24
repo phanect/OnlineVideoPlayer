@@ -23,3 +23,6 @@ qtcAddDeployment()
 HEADERS += \
     video.h \
     models/databasemanager.h
+
+OTHER_FILES += \
+    README.md
