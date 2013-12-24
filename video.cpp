@@ -36,7 +36,7 @@
 //}
 
 /** Video Model */
-Video::Video(const Video &) {
+Video::Video(QDjangoModel *parent) : QDjangoModel(parent) {
 	// TODO extract title and urltxt to local variables
 }
 

@@ -29,7 +29,7 @@ class Video : public QDjangoModel {
 
 public:
 	//explicit Video();
-	explicit Video(const Video &video);
+    explicit Video(QDjangoModel *parent = 0);
 
 	static Video* createFromUrl(QString urlstr);
 	static Video* createFromUrl(QUrl url);
